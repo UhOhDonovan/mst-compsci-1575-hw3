@@ -104,7 +104,11 @@ LLNode<T>* LinkedList<T>::getAtPtr(int i) {
     }
     return rp;
   }
-  else {return NULL;}
+  else {
+    cout << "!!! ERROR : PANIC in LINKEDLIST !!!" << endl;
+    cout << "Index out of range, returning NULL" << endl;
+    return NULL;
+  }
 }
 
 // -------------
@@ -224,6 +228,8 @@ LLNode<T>* LinkedList<T>::find(const T& x) {
     }
     rp = rp->m_next;
   }
+  cout << "!!! ERROR : PANIC in LINKEDLIST !!!" << endl;
+  cout << x << " not in Linked List" << endl;
   return NULL;
 }
 
@@ -232,34 +238,18 @@ LLNode<T>* LinkedList<T>::find(const T& x) {
 template<typename T>
 void LinkedList<T>::reverse() {
   LLNode<T>* curr = m_head;
-  //T lastval = curr->m_data;
   LLNode<T>* prev = NULL;
   LLNode<T>* next = NULL;
   while(curr->m_next != NULL) {
-    next = curr->m_next; //Sets next to the next value
-    curr->m_next = prev; //Sets next value to previous value
-    prev = curr; //Sets previous to current value
-    curr = next; //Sets current value to next value
+    next = curr->m_next;
+    curr->m_next = prev;
+    prev = curr;
+    curr = next;
   }
   m_head = prev;
   delete curr;
   curr = NULL;
   next = NULL;
-  //insert_back(lastval);
-
-
-
-  // LLNode<T>* cur = m_head;
-  // LLNode<T>* prev = NULL;
-  // LLNode<T>* next = cur->m_next;
-  // while(cur->m_next != NULL) {
-  //   cur->m_next = prev;
-  //   prev = cur;
-  //   cur = next;
-  //   next = cur->m_next;
-  // }
-  // cur->m_next = prev;
-  // m_head = cur;
 }
 
 // Purpose: appends two lists
